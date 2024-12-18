@@ -51,7 +51,7 @@ Use the `EvieCoreUpdate` interface to create objects that should receive updates
 - **Centralized update management**: All objects that need to be updated every frame can be centrally managed via `UpdateManager`.
 - **Ease of adding new components**: When a new component with update logic needs to be added, all you need to do is implement the `EvieCoreUpdate` interface and register it.
 - **Simplification of code**: Eliminates the need to manually add update calls to the `Update()` methods of multiple objects, reducing redundancy and increasing code readability.
-### ### DataManager
+### DataManager
 
 This module implements a centralized data manager that allows you to store and manage data of various types in a dictionary. The `DataManager` provides methods for adding, retrieving, deleting and clearing key data.
 
