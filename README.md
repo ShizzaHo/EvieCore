@@ -3,11 +3,11 @@ EvieCore is a set of solutions and tools for solving various tasks.
 The main task of EvieCore is to simplify the developer's life, optimize and organize the project by shelves.
 # Структура EvieCore
 
-![[01.png]]
+![](docs/01.png)
 
 Create a global object EvieCore on the main stage, for example in the menu of your game, hang the script EvieCore.cs on it, and customize it as needed
 
-![[02.png]]
+![](docs/02.png)
 
 The DontDestroyThisObject parameter will make EvieCore available throughout the project, when changing scenes the object will not be deleted and will always be available to you
 
