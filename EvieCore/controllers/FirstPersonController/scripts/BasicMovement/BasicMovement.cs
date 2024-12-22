@@ -50,7 +50,14 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
     {
         rb = GetComponent<Rigidbody>();
 
-        UpdateManager.Instance.Register(this);
+        if (UpdateManager.Instance != null)
+        {
+            UpdateManager.Instance.Register(this);
+        }
+        else
+        {
+            Debug.LogError($"[EVIECORE/ERROR] UpdateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
+        }
     }
 
     public void OnUpdate()
@@ -63,13 +70,11 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
         {
             rb.linearDamping = groundDrag;
 
-            // Jumping logic
             if (canJump && Input.GetKeyDown(KeyCode.Space) && !isJumping)
             {
                 Jump();
             }
 
-            // Running logic
             if (canRun && Input.GetKey(KeyCode.LeftShift))
             {
                 isRunning = true;
@@ -95,8 +100,6 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isJumping = true;
-
-        //MessageManager.Instance.SendMessage("PlayerJump");
     }
 
     private bool GroundCheck()

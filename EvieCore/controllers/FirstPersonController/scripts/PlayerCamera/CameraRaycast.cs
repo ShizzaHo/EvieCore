@@ -47,7 +47,14 @@ public class PlayerCamera : MonoBehaviour, EvieCoreUpdate
 
         camera = GetComponentInChildren<Camera>().transform;
 
-        UpdateManager.Instance.Register(this);
+        if (UpdateManager.Instance != null)
+        {
+            UpdateManager.Instance.Register(this);
+        }
+        else
+        {
+            Debug.LogError($"[EVIECORE/ERROR] UpdateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
+        }
     }
 
     public void OnUpdate()
