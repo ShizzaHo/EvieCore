@@ -102,39 +102,39 @@ public class Player : MonoBehaviour
 This module implements a message system for interaction between objects. The logic resembles the mechanics of events in the work of scratch, which makes it intuitive for those who are familiar with this platform. **Important:** Using a messaging system is not always considered a good practice, as it can make it more difficult to track relationships between objects.
 #### How to use:
 
-`
-csharp public class player : mono-secure behavior
+```csharp
+public class Player : MonoBehaviour
 {
-private void Start()
-{
-// Subscribing to a message without arguments
-        Message manager.Example.Subscribe("GameStart", OnGameStart);
+    private void Start()
+    {
+        // Subscribe to the message without arguments
+        MessageManager.Instance.Subscribe(“GameStart”, OnGameStart);
 
-        // Subscribing to a message with an argument
-        Message manager.Example.Subscribe<int>("PlayerScored", OnPlayerScored);
+        // Subscribe to a message with an argument
+        MessageManager.Instance.Subscribe<int>(“PlayerScored”, OnPlayerScored);
 
         // Sending a message without arguments
-        Message manager.Example.Send a message ("Game Launch");
+        MessageManager.Instance.SendMessage(“GameStart”);
 
         // Sending a message with an argument
-        Message manager.Example.Send a message ("List of players", 10);
+        MessageManager.Instance.SendMessage(“PlayerScored”, 10);
     }
 
-    private void when starting the game()
-{
-Debug.Log("The game has started!");
+    private void OnGameStart()
+    {
+        Debug.Log(“Game has started!”);
     }
 
-    private void when players score points (number of points)
-{
-Debug.Log($"Player scored {points} points!");
+    private void OnPlayerScored(int points)
+    {
+        Debug.Log($“Player scored {points} points!”);
     }
 
-    private message void onDestroy()
-{
-// Unsubscribe from messages
-        Message manager.Example.Unsubscribe ("Game Launch", OnGameStart);
-        Message manager.Example.Unsubscribe<int>("Rated by Players", OnPlayerScored);
+    private void OnDestroy()
+    {
+        // Unsubscribe from messages
+        MessageManager.Instance.Unsubscribe(“GameStart”, OnGameStart);
+        MessageManager.Instance.Unsubscribe<int>(“PlayerScored”, OnPlayerScored);
     }
 }
 ```
@@ -165,27 +165,27 @@ This module implements a trigger system for games that allows you to control cer
 
 #### How to use:
 
-``csharp
-public class GameController : mono-safe behavior
+```csharp
+public class GameController : MonoBehaviour
 {
-private void Start()
-{
-// Adding triggers
-        The trigger manager.Example.Add a trigger ("LevelComplete");
-        TriggerManager.Example.AddTrigger("hasKey", false);
+    private void Start()
+    {
+        // Add triggers
+        TriggerManager.Instance.AddTrigger(“LevelComplete”);
+        TriggerManager.Instance.AddTrigger(“HasKey”, false);
 
-        // Setting the trigger state
-        The trigger manager.Example.SetTriggerState("hasKey", true);
+        // Set the trigger state
+        TriggerManager.Instance.SetTriggerState(“HasKey”, true);
 
-        // Checking the trigger status
-        if (TriggerManager.Example.GetTriggerState("hasKey"))
-{
-Debug.Log("The player has a key").;
-}
+        // Check the trigger state
+        if (TriggerManager.Instance.GetTriggerState(“HasKey”))
+        {
+            Debug.Log(“Player has the key.”);
+        }
 
-        // Getting a list of all triggers
-        var triggers = trigger manager.Example.GetAllTriggers();
-        Debug.Log("All triggers: " + line.Join(", ", triggers));
+        // Get a list of all triggers
+        var triggers = TriggerManager.Instance.GetAllTriggers();
+        Debug.Log("All triggers: " + string.Join(", ", triggers));
     }
 }
 ```
