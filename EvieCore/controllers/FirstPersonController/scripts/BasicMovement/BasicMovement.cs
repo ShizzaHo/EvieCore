@@ -3,8 +3,6 @@ using UnityEngine.Events;
 
 public class BasicMovement : MonoBehaviour, EvieCoreUpdate
 {
-    //=== BasicStart ===
-
     [Header("Movement Settings")]
     [Tooltip("The speed at which the player moves.")]
     [Range(1f, 20f)]
@@ -47,13 +45,6 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
 
     private Rigidbody rb;
 
-    //=== CameraAnimationStart ===
-
-    public UnityAction CameraAnimationMovement_WALKING;
-    public UnityAction CameraAnimationMovement_JUMP;
-    public UnityAction CameraAnimationMovement_RUNNING;
-
-    //=== CameraAnimationEnd ===
 
     void Start()
     {
@@ -82,27 +73,15 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
             if (canRun && Input.GetKey(KeyCode.LeftShift))
             {
                 isRunning = true;
-                CameraAnimationMovement_RUNNING?.Invoke();
             }
             else
             {
                 isRunning = false;
             }
-
-            // Walking animation
-            if (horizontalInput != 0 || verticalInput != 0)
-            {
-                if (!isRunning)
-                    CameraAnimationMovement_WALKING?.Invoke();
-            }
         }
         else
         {
             rb.linearDamping = 0;
-            if (isJumping)
-            {
-                CameraAnimationMovement_JUMP?.Invoke();
-            }
         }
     }
 
@@ -116,6 +95,8 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isJumping = true;
+
+        //MessageManager.Instance.SendMessage("PlayerJump");
     }
 
     private bool GroundCheck()

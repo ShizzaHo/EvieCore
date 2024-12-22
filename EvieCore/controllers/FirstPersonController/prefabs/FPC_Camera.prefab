@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1846979595434207219}
   - component: {fileID: 7102749629173002461}
   - component: {fileID: 5225180056664950991}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -148,7 +148,8 @@ GameObject:
   - component: {fileID: 2888699582309999945}
   - component: {fileID: 7771457234878270433}
   - component: {fileID: 8853985419431023832}
-  m_Layer: 0
+  - component: {fileID: 3837754878412543525}
+  m_Layer: 2
   m_Name: FPC_Camera
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: dca6666a00cb90a439c9387f7d1d5a41, type: 3}
@@ -196,8 +197,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c21c6a0057d3e49824ab6103f23219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 500
-  sensitivityY: 500
+  sensitivityX: 300
+  sensitivityY: 300
   minVerticalAngle: -90
   maxVerticalAngle: 90
   orientation: {fileID: 0}
+--- !u!114 &3837754878412543525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891094860109801211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273a235ae1460ad46bb1f85facd4c808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendMessage: 1
+  defaultAddtiveMessage: AIMTrigger
+  actions:
+  - tag: use
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityActionEasyLogger, Assembly-CSharp
+          m_MethodName: log
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: test
+            m_BoolArgument: 0
+          m_CallState: 2
+  maxDistance: 3
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 115
+  drawDebugRay: 1
+  rayOriginOffset: 0.1
+  _camera: {fileID: 1846979595434207219}
