@@ -1,9 +1,11 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 public class CameraPin : MonoBehaviour, EvieCoreUpdate
 {
     [Header("Camera Pin Settings")]
     [Tooltip("The position to which the camera should be pinned.")]
+    [Required]
     public Transform cameraPosition;
 
     void Start()

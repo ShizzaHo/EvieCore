@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,6 +35,7 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
 
     [Header("References")]
     [Tooltip("The orientation object to define movement direction.")]
+    [Required]
     public Transform orientation;
 
     private bool grounded;
@@ -58,10 +60,17 @@ public class BasicMovement : MonoBehaviour, EvieCoreUpdate
         {
             Debug.LogError($"[EVIECORE/ERROR] UpdateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
         }
+
+        if (StateManager.Instance == null)
+        {
+            Debug.LogError($"[EVIECORE/ERROR] StateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
+        }
     }
 
     public void OnUpdate()
     {
+        if (!StateManager.Instance.IsCurrentState("playing")) return;
+
         grounded = GroundCheck();
 
         GetInput();

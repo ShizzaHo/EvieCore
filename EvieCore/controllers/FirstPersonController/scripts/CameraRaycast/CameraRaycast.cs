@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class PlayerRaycast : MonoBehaviour
     public bool sendMessage = false;
 
     [Tooltip("Default message sent on hover or leave: true - hover, false - leave.")]
+    [ShowIf("sendMessage")]
     public string defaultAddtiveMessage;
 
     [Header("Action Settings")]
@@ -43,10 +45,12 @@ public class PlayerRaycast : MonoBehaviour
 
     [Tooltip("Offset for the ray's starting position from the camera.")]
     [Range(0f, 5f)] // Define a range for the ray origin offset
+    [ShowIf("drawDebugRay")]
     public float rayOriginOffset = 0.1f;
 
     [Header("References")]
     [Tooltip("Reference to the player's camera. Defaults to the main camera if left empty.")]
+    [Required]
     public Camera _camera;
 
     private string _lastHitTag = null; // The tag of the last object the player looked at

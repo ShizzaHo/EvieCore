@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,6 +24,7 @@ public class PlayerCamera : MonoBehaviour, EvieCoreUpdate
 
     [Header("Camera References")]
     [Tooltip("The orientation transform used to rotate the player horizontally.")]
+    [Required]
     public Transform orientation;
 
     [Header("Roll Settings")]
@@ -38,7 +40,9 @@ public class PlayerCamera : MonoBehaviour, EvieCoreUpdate
     private float zRotation;
     private float targetZRotation;
     private float smoothingFactor = 0.1f; // Сглаживание
-    private float lastMouseX = 0f;  // Для отслеживания изменений
+    private float lastMouseX = 0f;
+    private Vector2 currentMouseLook;
+    private Vector2 appliedMouseLook;
 
     void Start()
     {
@@ -55,31 +59,39 @@ public class PlayerCamera : MonoBehaviour, EvieCoreUpdate
         {
             Debug.LogError($"[EVIECORE/ERROR] UpdateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
         }
+
+        if (StateManager.Instance == null)
+        {
+            Debug.LogError($"[EVIECORE/ERROR] StateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
+        }
     }
 
     public void OnUpdate()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
+        if (!StateManager.Instance.IsCurrentState("playing")) return;
 
-        yRotation += mouseX;
-        xRotation -= mouseY;
+        float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY;
+
+        // Добавляем сглаживание движения мыши
+        currentMouseLook = new Vector2(mouseX, mouseY);
+        appliedMouseLook = Vector2.Lerp(appliedMouseLook, currentMouseLook, smoothingFactor);
+
+        yRotation += appliedMouseLook.x;
+        xRotation -= appliedMouseLook.y;
 
         xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
 
         // Рассчитываем целевой угол наклона по оси Z
-        targetZRotation = -mouseX * maxRollAngle;
+        targetZRotation = -appliedMouseLook.x * maxRollAngle;
         targetZRotation = Mathf.Clamp(targetZRotation, -maxRollAngle, maxRollAngle);
 
-        // Уменьшаем "шумы" и сглаживаем вращение
+        // Сглаживаем наклон по оси Z
         zRotation = Mathf.Lerp(zRotation, targetZRotation, smoothingFactor);
 
         // Применяем повороты
         transform.rotation = Quaternion.Euler(xRotation, yRotation, zRotation);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
-        // Сохраняем текущую позицию мыши для следующего шага
-        lastMouseX = mouseX;
     }
 
     private void OnDestroy()

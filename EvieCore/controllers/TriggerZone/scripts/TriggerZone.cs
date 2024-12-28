@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,11 @@ public class TriggerZone : MonoBehaviour
     [SerializeField]
     private bool isActive = true;
 
+    [Header("Tag Settings")]
+    [Tooltip("List of tags that will trigger this zone.")]
+    [SerializeField]
+    private List<string> validTags = new List<string>();
+
     [Header("Trigger Check Settings")]
     [Tooltip("Check trigger states when entering the trigger.")]
     [SerializeField]
@@ -33,10 +39,12 @@ public class TriggerZone : MonoBehaviour
 
     [Tooltip("Action to execute when entering the trigger.")]
     [SerializeField]
+    [ShowIf("executeAction")]
     private UnityEvent executeActionEnter;
 
     [Tooltip("Action to execute when exiting the trigger.")]
     [SerializeField]
+    [ShowIf("executeAction")]
     private UnityEvent executeActionExit;
 
     [Header("Message Settings")]
@@ -46,10 +54,12 @@ public class TriggerZone : MonoBehaviour
 
     [Tooltip("Send a message when entering the trigger.")]
     [SerializeField]
+    [ShowIf("sendMessage")]
     private string messageEnter;
 
     [Tooltip("Send a message when exiting the trigger.")]
     [SerializeField]
+    [ShowIf("sendMessage")]
     private string messageExit;
 
     [Header("Required Trigger States")]
@@ -59,9 +69,9 @@ public class TriggerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isActive) return;
+        if (!isActive || !IsValidTag(other.tag)) return;
 
-        // Проверяем флаг проверки на входе
+        // Check flag for entering trigger
         if (CheckWhenEntering)
         {
             if (AreAllTriggersMatching())
@@ -77,13 +87,13 @@ public class TriggerZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!isActive)
+        if (!isActive || !IsValidTag(other.tag))
         {
-            Debug.LogWarning($"TriggerZone is not active. Ignoring OnTriggerExit for {other.name}.");
+            Debug.LogWarning($"TriggerZone is not active or invalid tag. Ignoring OnTriggerExit for {other.name}.");
             return;
         }
 
-        // Проверяем флаг проверки на выходе
+        // Check flag for exiting trigger
         if (CheckWhenExiting)
         {
             if (AreAllTriggersMatching())
@@ -98,9 +108,20 @@ public class TriggerZone : MonoBehaviour
     }
 
     /// <summary>
-    /// Проверяет, соответствуют ли все триггеры в локальном списке состояниям в глобальном TriggerManager.
+    /// Checks if the tag is valid.
     /// </summary>
-    /// <returns>True, если все триггеры совпадают, иначе False.</returns>
+    /// <param name="tag">The tag to check.</param>
+    /// <returns>True if the tag is valid, otherwise false.</returns>
+    private bool IsValidTag(string tag)
+    {
+        if (validTags.Count == 0) return true; // If no tags are specified, allow all tags
+        return validTags.Contains(tag);
+    }
+
+    /// <summary>
+    /// Checks if all triggers in the local list match states in the global TriggerManager.
+    /// </summary>
+    /// <returns>True if all triggers match, otherwise false.</returns>
     private bool AreAllTriggersMatching()
     {
         foreach (var trigger in needTriggersState)
@@ -122,10 +143,10 @@ public class TriggerZone : MonoBehaviour
     }
 
     /// <summary>
-    /// Выполняет логику триггера, включая отправку сообщений и выполнение действий.
+    /// Executes the trigger logic, including sending messages and performing actions.
     /// </summary>
-    /// <param name="other">Объект, вошедший или вышедший из триггера.</param>
-    /// <param name="isEnter">True, если объект вошел; False, если вышел.</param>
+    /// <param name="other">The object entering or exiting the trigger.</param>
+    /// <param name="isEnter">True if the object is entering; False if exiting.</param>
     private void ExecuteTriggerLogic(Collider other, bool isEnter)
     {
         if (sendMessage)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5534886243720585904}
   m_Layer: 2
   m_Name: FPC_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 2800000, guid: dca6666a00cb90a439c9387f7d1d5a41, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 3447140655402130058}
   m_Layer: 2
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5448660747316787643}
   m_Layer: 2
   m_Name: _CameraPos
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 8508892393928172628}
   m_Layer: 2
   m_Name: _Orientation
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
