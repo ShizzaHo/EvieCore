@@ -34,5 +34,3 @@ Follow the steps below to install EvieCore:
 * Create an EvieCore component on the main stage (prefabs can be found in EvieCore\prefabs, or create an empty object with an EvieCore script)
 
 * Add child objects with script modules (also available in EvieCore\prefabs)
-
-Translated with DeepL.com (free version)
