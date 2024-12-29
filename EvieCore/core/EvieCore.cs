@@ -11,6 +11,8 @@ public class EvieCore : MonoBehaviour
 
     void Awake()
     {
+        EvieFS.Initialize();
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

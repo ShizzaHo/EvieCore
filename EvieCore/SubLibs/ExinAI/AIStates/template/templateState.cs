@@ -36,9 +36,4 @@ public class TemplateState : ExinAIState
     {
         
     }
-
-    private void MoveToRandomPoint()
-    {
-        
-    }
 }
