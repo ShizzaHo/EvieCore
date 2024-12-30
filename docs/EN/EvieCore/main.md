@@ -16,10 +16,10 @@
     
     4.2. Trigger Zone (Prefab and script) - Allows you to create zones that will be triggered when an object (such as a player) hits and check triggers
 
-## Controllers (to be added)
+## Controllers
 
-### FirstPersonController
+1. [FirstPersonController](./fpc.md) - A full-fledged "constructor" of the player with a first-person view with extensive functionality
 
-### SimpleHUD
+2. [SimpleHUD](./hud.md) - HUD's game constructor, a set of ready-made components
 
-### TriggerZone
+3. [TriggerZone](./triggerZone.md) - An advanced zone handler that tracks the penetration of an object with a specific tag into the zone
