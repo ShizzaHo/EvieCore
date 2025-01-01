@@ -57,6 +57,31 @@ public class EvieFS
         }
     }
 
+    public void CreateDir(string dirPath, string folderPath)
+    {
+        string fullDirPath = Path.Combine(dirPath, folderPath);
+        if (!Directory.Exists(fullDirPath))
+        {
+            Directory.CreateDirectory(fullDirPath);
+        }
+        else
+        {
+            Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS/ERROR] The directory {folderPath} already exists in the {dirPath} directory.");
+        }
+    }
+
+    public void CreateDir(string dirPath)
+    {
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
+        else
+        {
+            Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS/ERROR] The directory {dirPath} already exists.");
+        }
+    }
+
     public void EditFile(string filePath, string newFileContent)
     {
         if (File.Exists(filePath))

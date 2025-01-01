@@ -91,7 +91,7 @@ public class Console : MonoBehaviour, EvieCoreDebugTool
     /// <summary>
     /// Вывод сообщения в консоль с ограничением на количество строк.
     /// </summary>
-    private void LogToConsole(string message)
+    public void LogToConsole(string message)
     {
         if (consoleOutput != null)
         {

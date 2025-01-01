@@ -24,8 +24,6 @@ public class FreeCamera : MonoBehaviour, EvieCoreDebugTool
         camera.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
-        Debug.Log(1);
     }
 
     public bool IsActive()

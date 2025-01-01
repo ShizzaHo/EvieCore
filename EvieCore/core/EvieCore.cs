@@ -9,9 +9,18 @@ public class EvieCore : MonoBehaviour
     [SerializeField]
     private bool DontDestroyThisObject = true;
 
+    [Header("SybLibs initialize")]
+    [SerializeField]
+    private bool InitializeEvieFS = true;
+
+    [SerializeField]
+    private bool InitializeEvieSaveLoad = true;
+
     void Awake()
     {
-        EvieFS.Initialize();
+        if (InitializeEvieFS) EvieFS.Initialize();
+
+        if (InitializeEvieSaveLoad) EvieSaveLoad.Initialize();
 
         if (Instance != null && Instance != this)
         {
