@@ -7,7 +7,7 @@
 The `StateManager` class provides a centralized way to manage states in a game or application. It implements the Singleton design pattern, ensuring a single global instance is accessible throughout the project. This class allows you to define a list of possible states, set the current state, and check whether the current state matches a specific value.
 
 ## Classes and Interfaces 
-Class `StateManager`** `StateManager` is the core class responsible for state management.
+Class `StateManager` is the core class responsible for state management.
 
 #### Properties: 
  
@@ -32,9 +32,6 @@ Class `StateManager`** `StateManager` is the core class responsible for state ma
  
 - **`AddState(string newState)`** : Adds a new state to the list if it does not already exist.
   - Logs a warning if the state already exists.
-
-#### Logging: 
-All warnings are logged to the console with the prefix `[EVIECORE/STATEMANAGER/WARNING]` for easy identification.
 
 ---
 

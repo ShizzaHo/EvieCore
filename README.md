@@ -10,9 +10,27 @@ EvieCore provides powerful tools for game development, simplifying the process a
 
 1. [EvieCore](./docs/EN/EvieCore/main.md) is the centerpiece that unifies all the tools. It can be used as a standalone tool, as modules and controllers allow you to work independently.
 
-2. EvieCoreAdditional - additional tools that use EvieCore. For example, DebugTools for debugging games.
+2. [EvieCoreAdditional](./docs/EN/EvieCoreAdditional/main.md) - additional tools that use EvieCore. For example, DebugTools for debugging games.
 
-3. ExinAI - part of EvieCore/SubLibs, used to create artificial intelligence for characters, based on state logic.
+3. EvieCore/SubLibs — Additional libraries for EvieCore, deeply integrated with EvieCore
+
+    3.1 [ExinAI](./docs/EN/SubLibs/ExinAI/main.md) — Part of EvieCore/SubLibs. It is used to create artificial intelligence for characters, it works based on the logic of states.
+
+    3.2 EvieFS — Allows you to conveniently access the file system
+
+    3.2.1 EvieConfigManager — Allows you to create and manage configs in the `.EvieConfig` format
+
+    3.3 EvieSaveLoad — A universal save/upload system for your projects
+
+4. EvieCore/Utils — Auxiliary scripts for EvieCore operation
+
+    4.1. CameraPin — Attaches the camera to the object
+
+    4.2. DictionaryJSON — Allows you to serialize and deserialize the Dictionary
+
+    4.3. ObjectRoll — Creates smooth movement for an object when moving, it is recommended to use it in conjunction with `FPC_Camera`
+
+    4.4. UnityActionEasyLogger <font color="red">[Usually]</font> — It is needed in order to bind the log to "UnityEvents`
 
 ## Installation
 Follow the steps below to install EvieCore:  

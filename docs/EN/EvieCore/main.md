@@ -2,6 +2,8 @@
 
 # EvieCore
 
+The main core of the entire framework, thanks to it, all the magic happens that gives optimization, centralization and other charms, everything else related to EvieCore somehow uses core modules/components.
+
 ## Modules
 
 1. [Update Manager](./updateManager.md) - Centralized Update() to improve the efficiency of your game
