@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class TriggerManager : MonoBehaviour
 {
@@ -31,11 +32,10 @@ public class TriggerManager : MonoBehaviour
         if (!triggers.ContainsKey(triggerName))
         {
             triggers[triggerName] = initialState;
-            Debug.Log($"Trigger '{triggerName}' added with initial state: {initialState}");
         }
         else
         {
-            Debug.LogWarning($"Trigger '{triggerName}' already exists.");
+            Debug.LogWarning($"[EVIECORE/TRIGGERMANAGER/WARNING] trigger '{triggerName}' already exists.");
         }
     }
 
@@ -49,11 +49,10 @@ public class TriggerManager : MonoBehaviour
         if (triggers.ContainsKey(triggerName))
         {
             triggers[triggerName] = state;
-            Debug.Log($"Trigger '{triggerName}' state set to: {state}");
         }
         else
         {
-            Debug.LogError($"Trigger '{triggerName}' does not exist.");
+            Debug.LogWarning($"[EVIECORE/TRIGGERMANAGER/WARNING] trigger '{triggerName}' does not exist.");
         }
     }
 
@@ -70,7 +69,7 @@ public class TriggerManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Trigger '{triggerName}' does not exist.");
+            Debug.LogError($"[EVIECORE/TRIGGERMANAGER/ERROR] trigger '{triggerName}' does not exist.");
             return false;
         }
     }

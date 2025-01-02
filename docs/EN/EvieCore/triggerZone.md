@@ -1,6 +1,6 @@
 [[Back]](./main.md)
 
-# TriggerZone <span style="font-size: 10px">[EvieCore/controllers]</span>
+# TriggerZone <span style="font-size: 10px">[EvieCore/controller]</span>
 
 ## Description 
 

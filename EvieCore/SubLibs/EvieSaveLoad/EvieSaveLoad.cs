@@ -11,6 +11,11 @@ public class GameData
     public Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
 }
 
+public interface EvieOnLoad
+{
+    void OnLoad();
+}
+
 public class EvieSaveLoad : MonoBehaviour
 {
     public static EvieSaveLoad Instance { get; private set; }
@@ -28,7 +33,7 @@ public class EvieSaveLoad : MonoBehaviour
         saveDirectory = Path.Combine(fileSystem.systemDocumentDir, Application.productName, "saves");
 
         // Создаём директорию для сохранений, если её нет
-        fileSystem.CreateDir(saveDirectory);
+        if (!fileSystem.isDirExist(saveDirectory)) fileSystem.CreateDir(saveDirectory);
 
         // Ищем последнее сохранение
         lastSaveFileName = GetLastSaveFileName();
@@ -56,7 +61,7 @@ public class EvieSaveLoad : MonoBehaviour
         File.WriteAllText(fullPath, json);
 
         lastSaveFileName = fileName;
-        Debug.Log($"Game saved to: {fullPath}");
+        Debug.Log($"[EVIECORE/SYBLIBS/EVIESAVELOAD/LOG] Game saved to: {fullPath}");
     }
 
     // Загрузка данных
@@ -70,12 +75,28 @@ public class EvieSaveLoad : MonoBehaviour
             string json = File.ReadAllText(fullPath);
             // Используем DictionaryJSON для десериализации
             currentData.keyValuePairs = DictionaryJSON.Deserialize(json);
-            Debug.Log($"Game loaded from: {fullPath}");
+            ExecuteOnLoad();
+            Debug.Log($"[EVIECORE/SYBLIBS/EVIESAVELOAD/LOG] Game loaded from: {fullPath}");
         }
         else
         {
-            Debug.LogWarning($"Save file {fileName} not found! Initializing new data.");
+            Debug.LogWarning($"[EVIECORE/SYBLIBS/EVIESAVELOAD/WARNING] Save file {fileName} not found! Initializing new data.");
             currentData = new GameData();
+        }
+    }
+
+    // Выполняет OnLoad на всех экземплярах EvieOnLoad
+    private void ExecuteOnLoad()
+    {
+        // Найти все объекты на сцене
+        EvieOnLoad[] evieObjects = FindObjectsOfType<MonoBehaviour>(true) // true включает неактивные объекты
+            .OfType<EvieOnLoad>()
+            .ToArray();
+
+        // Вызвать OnLoad у всех найденных объектов
+        foreach (EvieOnLoad evie in evieObjects)
+        {
+            evie.OnLoad();
         }
     }
 
@@ -87,7 +108,7 @@ public class EvieSaveLoad : MonoBehaviour
 
         // Обновляем последнее сохранение
         lastSaveFileName = GetLastSaveFileName();
-        Debug.Log($"Save file {fileName} deleted.");
+        Debug.Log($"[EVIECORE/SYBLIBS/EVIESAVELOAD/LOG] Save file {fileName} deleted.");
     }
 
     // Получение всех сохранений
@@ -128,11 +149,11 @@ public class EvieSaveLoad : MonoBehaviour
             }
             catch (InvalidCastException)
             {
-                Debug.LogWarning($"Key '{key}' cannot be cast to {typeof(T)}. Returning default value.");
+                Debug.LogWarning($"[EVIECORE/SYBLIBS/EVIESAVELOAD/WARNING] Key '{key}' cannot be cast to {typeof(T)}. Returning default value.");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error retrieving key '{key}': {ex.Message}");
+                Debug.LogError($"[EVIECORE/SYBLIBS/EVIESAVELOAD/ERROR] Error retrieving key '{key}': {ex.Message}");
             }
         }
         return defaultValue;

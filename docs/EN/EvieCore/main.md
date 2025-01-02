@@ -16,6 +16,10 @@
     
     4.2. Trigger Zone (Prefab and script) - Allows you to create zones that will be triggered when an object (such as a player) hits and check triggers
 
+5. [Settings Manager](./settingsManager.md) - A system for managing project settings, convenient editing of graphics and sound settings
+
+6. [StateManager](./stateManager.md) - A system for managing the general state of the game (for example, the state for gameplay, cut scenes, pauses, etc., etc.)
+
 ## Controllers
 
 1. [FirstPersonController](./fpc.md) - A full-fledged "constructor" of the player with a first-person view with extensive functionality

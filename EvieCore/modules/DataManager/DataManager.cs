@@ -40,12 +40,12 @@ public class DataManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"DataManager: значение для ключа '{key}' не соответствует типу {typeof(T)}.");
+                Debug.LogWarning($"[EVIECORE/DATAMANAGER/WARNING] the value for the key '{key}' does not match the type {typeof(T)}.");
             }
         }
         else
         {
-            Debug.LogWarning($"DataManager: значение для ключа '{key}' не найдено.");
+            Debug.LogWarning($"[EVIECORE/DATAMANAGER/WARNING] the value for the key '{key}' was not found.");
         }
         return default;
     }

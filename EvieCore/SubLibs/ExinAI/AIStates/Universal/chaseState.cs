@@ -83,7 +83,6 @@ public class chaseState : ExinAIState
         // ≈сли игрок слишком близко, отправл€ем сообщение об атаке
         if (distanceToPlayer <= attackDistance)
         {
-            Debug.Log("[EVIECORE/EXINAI] Player is within attack distance. Attacking.");
             if (sendMessages) exinAI.Message(isPlayerAttackMessage);
             return;
         }
@@ -91,7 +90,6 @@ public class chaseState : ExinAIState
         // ≈сли игрок слишком далеко, прекращаем преследование
         if (distanceToPlayer > maxChaseDistance)
         {
-            Debug.Log("[EVIECORE/EXINAI] Player out of chase range. Exiting chase.");
             if (sendMessages) exinAI.Message(isPlayerLoseMessage);
             return;
         }
@@ -105,7 +103,6 @@ public class chaseState : ExinAIState
         {
             if (!hit.collider.CompareTag("Player"))
             {
-                Debug.Log("[EVIECORE/EXINAI] Lost sight of player. Exiting chase.");
                 if (sendMessages) exinAI.Message(isPlayerLoseMessage);
                 return;
             }

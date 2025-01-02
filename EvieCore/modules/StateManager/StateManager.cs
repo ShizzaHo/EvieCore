@@ -30,11 +30,10 @@ public class StateManager : MonoBehaviour
         if (states.Contains(newState))
         {
             currentState = newState;
-            Debug.Log($"Текущее состояние изменено на: {currentState}");
         }
         else
         {
-            Debug.LogWarning($"StateManager: Состояние '{newState}' отсутствует в списке возможных состояний.");
+            Debug.LogWarning($"[EVIECORE/STATEMANAGER/WARNING] The state '{newState}' is missing from the list of possible states.");
         }
     }
 
@@ -53,11 +52,10 @@ public class StateManager : MonoBehaviour
         if (!states.Contains(newState))
         {
             states.Add(newState);
-            Debug.Log($"Состояние '{newState}' добавлено в список.");
         }
         else
         {
-            Debug.LogWarning($"StateManager: Состояние '{newState}' уже существует в списке.");
+            Debug.LogWarning($"[EVIECORE/STATEMANAGER/WARNING] The state '{newState}' already exists in the list.");
         }
     }
 }

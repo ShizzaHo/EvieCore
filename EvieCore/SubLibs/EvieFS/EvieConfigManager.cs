@@ -42,7 +42,7 @@ public class EvieConfigManager
         }
         else
         {
-            Debug.LogError($"Конфигурационный файл {configName} не найден.");
+            Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] The {configName} configuration file was not found.");
         }
     }
 
@@ -55,7 +55,7 @@ public class EvieConfigManager
         }
         else
         {
-            Debug.LogError("Конфигурационный файл не загружен или не создан.");
+            Debug.LogError("[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] The configuration file has not been uploaded or created.");
         }
     }
 
@@ -79,7 +79,7 @@ public class EvieConfigManager
         }
         else
         {
-            Debug.LogError($"Конфигурационный файл {configName} уже существует.");
+            Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] The {configName} configuration file already exists.");
         }
     }
 
@@ -100,7 +100,7 @@ public class EvieConfigManager
         }
         else
         {
-            Debug.LogError($"Ключ {key} не найден в конфигурации.");
+            Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] The {key} was not found in the configuration.");
         }
     }
 
@@ -124,7 +124,7 @@ public class EvieConfigManager
         }
         else
         {
-            Debug.LogError("Неподдерживаемый тип значения для конфигурации.");
+            Debug.LogError("[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] Unsupported value type for configuration.");
             return null;
         }
     }
@@ -186,19 +186,19 @@ public class EvieConfigManager
                 }
                 else
                 {
-                    Debug.LogError($"Тип {typeof(T)} не поддерживается.");
+                    Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] The {typeof(T)} type is not supported.");
                     return default;
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Ошибка при преобразовании значения: {ex.Message}");
+                Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] Error when converting the value: {ex.Message}");
                 return default;
             }
         }
         else
         {
-            Debug.LogError($"Ключ {key} не найден в конфигурации.");
+            Debug.LogError($"[EVIECORE/SYBLIBS/EVIEFS-CM/ERROR] The {key} was not found in the configuration.");
             return default;
         }
     }

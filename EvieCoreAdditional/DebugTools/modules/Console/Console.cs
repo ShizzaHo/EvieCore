@@ -107,7 +107,7 @@ public class Console : MonoBehaviour, EvieCoreDebugTool
             // Обновляем вывод в консоли
             consoleOutput.text = string.Join("\n", logLines);
         }
-        Debug.Log(message);
+        Debug.Log("[EVIECOREADDITIONAL/DEBUGTOOLS/CONSOLE/LOG]" + message);
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class Console : MonoBehaviour, EvieCoreDebugTool
         var existingCommand = commands.Find(c => c.command.Equals(commandName, StringComparison.OrdinalIgnoreCase));
         if (existingCommand != null)
         {
-            Debug.LogError($"Команда '{commandName}' уже зарегистрирована.");
+            Debug.LogError($"[EVIECOREADDITIONAL/DEBUGTOOLS/CONSOLE/ERROR] The command '{commandName}' has already been registered.");
             return;
         }
 

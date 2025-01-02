@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MessageManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class MessageManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Message \"{message}\" has a mismatched subscriber type.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
         else
@@ -59,7 +60,7 @@ public class MessageManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Message \"{message}\" has a mismatched subscriber type.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
     }
@@ -75,7 +76,7 @@ public class MessageManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Сообщение \"{message}\" имеет неподходящий тип подписчика.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
         else
@@ -100,7 +101,7 @@ public class MessageManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Сообщение \"{message}\" имеет неподходящий тип подписчика.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
     }
@@ -116,12 +117,12 @@ public class MessageManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Сообщение \"{message}\" имеет неподходящий тип подписчика.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
         else
         {
-            Debug.LogWarning($"Сообщение \"{message}\" не имеет подписчиков.");
+            Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
         }
     }
 
@@ -136,12 +137,12 @@ public class MessageManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Сообщение \"{message}\" имеет неподходящий тип подписчика.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
         else
         {
-            Debug.LogWarning($"Сообщение \"{message}\" не имеет подписчиков.");
+            Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] The \"{message}\" message has no subscribers.");
         }
     }
 }

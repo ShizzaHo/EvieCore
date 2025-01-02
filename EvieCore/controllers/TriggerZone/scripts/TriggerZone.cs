@@ -89,7 +89,7 @@ public class TriggerZone : MonoBehaviour
     {
         if (!isActive || !IsValidTag(other.tag))
         {
-            Debug.LogWarning($"TriggerZone is not active or invalid tag. Ignoring OnTriggerExit for {other.name}.");
+            Debug.LogWarning($"[EVIECORE/CONTROLLER/TRIGGERZONE/WARNING] TriggerZone is not active or invalid tag. Ignoring OnTriggerExit for {other.name}.");
             return;
         }
 
@@ -135,7 +135,7 @@ public class TriggerZone : MonoBehaviour
             bool globalState = TriggerManager.Instance.GetTriggerState(trigger.triggerName);
             if (globalState != trigger.isActive)
             {
-                Debug.LogWarning($"Trigger '{trigger.triggerName}' does not match: expected {trigger.isActive}, but found {globalState}");
+                Debug.LogWarning($"[EVIECORE/CONTROLLER/TRIGGERZONE/WARNING] Trigger '{trigger.triggerName}' does not match: expected {trigger.isActive}, but found {globalState}");
                 return false;
             }
         }
