@@ -10,17 +10,15 @@ EvieCore provides powerful tools for game development, simplifying the process a
 
 1. [EvieCore](./docs/EN/EvieCore/main.md) is the centerpiece that unifies all the tools. It can be used as a standalone tool, as modules and controllers allow you to work independently.
 
-2. [EvieCoreAdditional](./docs/EN/EvieCoreAdditional/main.md) - additional tools that use EvieCore. For example, DebugTools for debugging games.
+2. [EvieCoreAdditional](./docs/EN/EvieCoreAdditional/main.md) - additional libraries integrated into EvieCore logic. There are both free and paid solutions.
 
 3. EvieCore/SubLibs — Additional libraries for EvieCore, deeply integrated with EvieCore
 
-    3.1 [ExinAI](./docs/EN/SubLibs/ExinAI/main.md) — Part of EvieCore/SubLibs. It is used to create artificial intelligence for characters, it works based on the logic of states.
+    3.1 EvieFS — Allows you to conveniently access the file system
 
-    3.2 EvieFS — Allows you to conveniently access the file system
+    3.1.1 EvieConfigManager — Allows you to create and manage configs in the `.EvieConfig` format
 
-    3.2.1 EvieConfigManager — Allows you to create and manage configs in the `.EvieConfig` format
-
-    3.3 EvieSaveLoad — A universal save/upload system for your projects
+    3.2 EvieSaveLoad — A universal save/upload system for your projects
 
 4. EvieCore/Utils — Auxiliary scripts for EvieCore operation
 

@@ -1,43 +1,31 @@
-[[Back]](../../../README.md)
+[[Back]](./main.md)
 
 # EvieCoreAdditional
 
-Additional tools to EvieCore, unlike SubLibs only in greater independence from the core of EvieCore
+Additional libraries integrated into EvieCore logic. 
 
-## DebugTools
+## Einferia (Paid)
 
-A full-fledged in-game overlay that provides debugging tools for the game
+Einferia provides a powerful and flexible toolkit for creating complete stories and plots in your games, for example: visual dialog builder!
 
-### Modules
+<!-- [Read more...]() -->
 
-1. SimpleTool is a template for creating your own debugging tools
+[Coming soon...]
 
-2. FreeCamera - Allows you to exit the player's "body" and start controlling a free camera, an analog of noclip from Half Life
+## Arhion (Free)
 
-3. Console - A console for playing with the ability to expand commands. ``EvieCoreDefaultConsoleCommands`` adds the standard commands for the console that come with `EvieCoreAdditional`
+Arhion provides various tools for working with text data, gives you the possibility to add localization to your project, and also provides a preprocessor for TMP, allowing you to implement your own modules for managing TMP images
 
-    <details>
-        <summary>All commands EvieCoreDefaultConsoleCommands</summary>
+[Read more...](./Arhion/main.md)
 
-        eviecore - Displays the message "<color=#6da2ce>EVIECORE FOREVER!!!<color=white>" to the console. (Easter egg :D)
+## DebugTools (Free)
 
-        destroy [object_name] - Destroys an object with the specified name.
+DebugTools provides basic tools for debugging a document, as well as all means to create your own debugging tools.
 
-        timescale [value] - Changes the value of Time.timeScale.
+[Read more...](./DebugTools/main.md)
 
-        clean - Cleans the UpdateManager storage.
+## ExinAI (Free)
 
-        clrdm - Clears all data in the DataManager.
+ExinAI provides flexible tools to create AI for your enemies.
 
-        rmdm [key] - Deletes specific data from the DataManager using the specified key.
-
-        sendmessage [message text] - Sends a message via MessageManager.
-
-        setgamestate [state] - Sets the state of the game via StateManager.
-
-        edittrigger [key]-[true/false] - Changes the state of the trigger in the TriggerManager. The key and value are separated by a hyphen -. The value must be either true or false.
-    </details>
-
-### Special modules 
-
-1. The ``DebugTools`` UI, add the ``DEBUG_HUD`` prefab to the stage.
+[Read more...](./ExinAI/main.md)

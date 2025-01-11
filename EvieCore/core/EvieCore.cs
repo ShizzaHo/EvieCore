@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,15 +19,22 @@ public class EvieCore : MonoBehaviour
 
     void Awake()
     {
-        if (InitializeEvieFS) EvieFS.Initialize();
+        if (InitializeEvieFS)
+        {
+            EvieFS.Initialize();
+        }
 
-        if (InitializeEvieSaveLoad) EvieSaveLoad.Initialize();
+        if (InitializeEvieSaveLoad)
+        {
+            EvieSaveLoad.Initialize();
+        }
 
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
 
         if (DontDestroyThisObject)
