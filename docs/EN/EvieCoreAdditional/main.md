@@ -8,9 +8,7 @@ Additional libraries integrated into EvieCore logic.
 
 Einferia provides a powerful and flexible toolkit for creating complete stories and plots in your games, for example: visual dialog builder!
 
-<!-- [Read more...]() -->
-
-[Coming soon...]
+[Read more...](./Einferia/main.md)
 
 ## Arhion (Free)
 
