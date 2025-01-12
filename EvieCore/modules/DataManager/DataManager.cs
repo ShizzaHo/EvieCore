@@ -1,70 +1,73 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+namespace Eviecore
 {
-    public static DataManager Instance { get; private set; }
-
-    private Dictionary<string, object> dataStore = new Dictionary<string, object>();
-
-    void Awake()
+    public class DataManager : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        public static DataManager Instance { get; private set; }
 
-        Instance = this;
-    }
+        private Dictionary<string, object> dataStore = new Dictionary<string, object>();
 
-    public void SetData<T>(string key, T value)
-    {
-        if (dataStore.ContainsKey(key))
+        void Awake()
         {
-            dataStore[key] = value;
-        }
-        else
-        {
-            dataStore.Add(key, value);
-        }
-    }
-
-    public T GetData<T>(string key)
-    {
-        if (dataStore.TryGetValue(key, out var value))
-        {
-            if (value is T castedValue)
+            if (Instance != null && Instance != this)
             {
-                return castedValue;
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
+
+        public void SetData<T>(string key, T value)
+        {
+            if (dataStore.ContainsKey(key))
+            {
+                dataStore[key] = value;
             }
             else
             {
-                Debug.LogWarning($"[EVIECORE/DATAMANAGER/WARNING] the value for the key '{key}' does not match the type {typeof(T)}.");
+                dataStore.Add(key, value);
             }
         }
-        else
+
+        public T GetData<T>(string key)
         {
-            Debug.LogWarning($"[EVIECORE/DATAMANAGER/WARNING] the value for the key '{key}' was not found.");
+            if (dataStore.TryGetValue(key, out var value))
+            {
+                if (value is T castedValue)
+                {
+                    return castedValue;
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/DATAMANAGER/WARNING] the value for the key '{key}' does not match the type {typeof(T)}.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[EVIECORE/DATAMANAGER/WARNING] the value for the key '{key}' was not found.");
+            }
+            return default;
         }
-        return default;
-    }
 
-    public bool ContainsKey(string key)
-    {
-        return dataStore.ContainsKey(key);
-    }
-
-    public void RemoveData(string key)
-    {
-        if (dataStore.ContainsKey(key))
+        public bool ContainsKey(string key)
         {
-            dataStore.Remove(key);
+            return dataStore.ContainsKey(key);
         }
-    }
 
-    public void ClearAllData()
-    {
-        dataStore.Clear();
+        public void RemoveData(string key)
+        {
+            if (dataStore.ContainsKey(key))
+            {
+                dataStore.Remove(key);
+            }
+        }
+
+        public void ClearAllData()
+        {
+            dataStore.Clear();
+        }
     }
 }

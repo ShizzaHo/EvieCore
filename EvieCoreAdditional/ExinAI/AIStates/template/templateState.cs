@@ -2,38 +2,41 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TemplateState : ExinAIState
+namespace Eviecore
 {
-    private NavMeshAgent navMeshAgent;
-    private NavMeshSurface navMeshSurface;
-    private ExinAIController exinAI;
-
-    private void Start()
+    public class TemplateState : ExinAIState
     {
-        exinAI = GetComponent<ExinAIController>();
+        private NavMeshAgent navMeshAgent;
+        private NavMeshSurface navMeshSurface;
+        private ExinAIController exinAI;
 
-        if (exinAI == null)
+        private void Start()
         {
-            Debug.LogError($"[EVIECORE/EXINAI/ERROR] ExinAIController not found! Make sure it is added to the scene before using it {gameObject.name}.");
-            return;
+            exinAI = GetComponent<ExinAIController>();
+
+            if (exinAI == null)
+            {
+                Debug.LogError($"[EVIECORE/EXINAI/ERROR] ExinAIController not found! Make sure it is added to the scene before using it {gameObject.name}.");
+                return;
+            }
+
+            navMeshAgent = exinAI.NavMeshAgent;
+            navMeshSurface = exinAI.NavMeshSurface;
         }
 
-        navMeshAgent = exinAI.NavMeshAgent;
-        navMeshSurface = exinAI.NavMeshSurface;
-    }
+        public override void Enter()
+        {
 
-    public override void Enter()
-    {
-        
-    }
+        }
 
-    public override void StateUpdate()
-    {
-        
-    }
+        public override void StateUpdate()
+        {
 
-    public override void Exit()
-    {
-        
+        }
+
+        public override void Exit()
+        {
+
+        }
     }
 }

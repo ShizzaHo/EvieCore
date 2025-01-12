@@ -1,53 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface EvieCoreUpdate
+namespace Eviecore
 {
-    void OnUpdate();
-}
-
-public class UpdateManager : MonoBehaviour
-{
-    public static UpdateManager Instance { get; private set; }
-
-    private List<EvieCoreUpdate> updateStorage = new List<EvieCoreUpdate>();
-
-    void Awake()
+    public interface EvieCoreUpdate
     {
-        if (Instance != null && Instance != this)
+        void OnUpdate();
+    }
+
+    public class UpdateManager : MonoBehaviour
+    {
+        public static UpdateManager Instance { get; private set; }
+
+        private List<EvieCoreUpdate> updateStorage = new List<EvieCoreUpdate>();
+
+        void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
         }
-        Instance = this;
-    }
 
-    void Update()
-    {
-        foreach (var updatable in updateStorage)
+        void Update()
         {
-            updatable.OnUpdate();
+            foreach (var updatable in updateStorage)
+            {
+                updatable.OnUpdate();
+            }
         }
-    }
 
-    public void Register(EvieCoreUpdate updatable)
-    {
-        if (!updateStorage.Contains(updatable))
-            updateStorage.Add(updatable);
-    }
+        public void Register(EvieCoreUpdate updatable)
+        {
+            if (!updateStorage.Contains(updatable))
+                updateStorage.Add(updatable);
+        }
 
-    public void Unregister(EvieCoreUpdate updatable)
-    {
-        updateStorage.Remove(updatable);
-    }
+        public void Unregister(EvieCoreUpdate updatable)
+        {
+            updateStorage.Remove(updatable);
+        }
 
-    public void EnableDontDestroyOnLoad()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+        public void EnableDontDestroyOnLoad()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
-    public void ClearStorage()
-    {
-        updateStorage.Clear();
+        public void ClearStorage()
+        {
+            updateStorage.Clear();
+        }
     }
 }

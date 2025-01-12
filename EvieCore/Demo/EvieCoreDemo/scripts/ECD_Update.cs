@@ -1,24 +1,27 @@
 using TMPro;
 using UnityEngine;
 
-public class ECD_Update : MonoBehaviour, EvieCoreUpdate
+namespace Eviecore
 {
-    public int value = 0;
-
-    void Start()
+    public class ECD_Update : MonoBehaviour, EvieCoreUpdate
     {
-        UpdateManager.Instance.Register(this);
-    }
+        public int value = 0;
 
-    public void OnUpdate()
-    {
-        value++;
+        void Start()
+        {
+            UpdateManager.Instance.Register(this);
+        }
 
-        GetComponent<TMP_Text>().text = value.ToString();
-    }
+        public void OnUpdate()
+        {
+            value++;
 
-    void OnDestroy()
-    {
-        UpdateManager.Instance.Unregister(this);
+            GetComponent<TMP_Text>().text = value.ToString();
+        }
+
+        void OnDestroy()
+        {
+            UpdateManager.Instance.Unregister(this);
+        }
     }
 }

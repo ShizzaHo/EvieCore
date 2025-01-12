@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class UnityActionEasyLogger : MonoBehaviour
+namespace Eviecore
 {
-    public void log(string text)
+    public class UnityActionEasyLogger : MonoBehaviour
     {
-        Debug.Log(text);
+        public void log(string text)
+        {
+            Debug.Log(text);
+        }
     }
 }

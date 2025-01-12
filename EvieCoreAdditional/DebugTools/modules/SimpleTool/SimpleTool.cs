@@ -1,28 +1,34 @@
 using UnityEngine;
 
-public class SimpleTool : MonoBehaviour, EvieCoreDebugTool
+namespace Eviecore
 {
-
-    private bool isActive = false;
-
-    private void Start()
+    namespace Eviecore
     {
-        DEBUGHUDManager.Instance.AddDebugTool(this, "Simple Tool");
-    }
+        public class SimpleTool : MonoBehaviour, EvieCoreDebugTool
+        {
 
-    public void OnActivated()
-    {
-        isActive = true;
-    }
+            private bool isActive = false;
 
-    public void OnDeactivated()
-    {
-        isActive = false;
+            private void Start()
+            {
+                DEBUGHUDManager.Instance.AddDebugTool(this, "Simple Tool");
+            }
 
-    }
+            public void OnActivated()
+            {
+                isActive = true;
+            }
 
-    public bool IsActive()
-    {
-        return isActive;
+            public void OnDeactivated()
+            {
+                isActive = false;
+
+            }
+
+            public bool IsActive()
+            {
+                return isActive;
+            }
+        }
     }
 }

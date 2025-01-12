@@ -1,32 +1,35 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-public class CameraPin : MonoBehaviour, EvieCoreUpdate
+namespace Eviecore
 {
-    [Header("Camera Pin Settings")]
-    [Tooltip("The position to which the camera should be pinned.")]
-    [Required]
-    public Transform cameraPosition;
-
-    void Start()
+    public class CameraPin : MonoBehaviour, EvieCoreUpdate
     {
-        if (UpdateManager.Instance != null)
+        [Header("Camera Pin Settings")]
+        [Tooltip("The position to which the camera should be pinned.")]
+        [Required]
+        public Transform cameraPosition;
+
+        void Start()
         {
-            UpdateManager.Instance.Register(this);
+            if (UpdateManager.Instance != null)
+            {
+                UpdateManager.Instance.Register(this);
+            }
+            else
+            {
+                Debug.LogError($"[EVIECORE/ERROR] UpdateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
+            }
         }
-        else
+
+        public void OnUpdate()
         {
-            Debug.LogError($"[EVIECORE/ERROR] UpdateManager not found! Make sure it is added to the scene before using it {gameObject.name}.");
+            transform.position = cameraPosition.position;
         }
-    }
 
-    public void OnUpdate()
-    {
-        transform.position = cameraPosition.position;
-    }
-
-    private void OnDestroy()
-    {
-        UpdateManager.Instance.Unregister(this);
+        private void OnDestroy()
+        {
+            UpdateManager.Instance.Unregister(this);
+        }
     }
 }

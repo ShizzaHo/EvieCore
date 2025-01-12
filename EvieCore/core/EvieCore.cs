@@ -3,43 +3,46 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EvieCore : MonoBehaviour
+namespace Eviecore
 {
-    public static EvieCore Instance { get; private set; }
-
-    [SerializeField]
-    private bool DontDestroyThisObject = true;
-
-    [Header("SybLibs initialize")]
-    [SerializeField]
-    private bool InitializeEvieFS = true;
-
-    [SerializeField]
-    private bool InitializeEvieSaveLoad = true;
-
-    void Awake()
+    public class EvieCore : MonoBehaviour
     {
-        if (InitializeEvieFS)
-        {
-            EvieFS.Initialize();
-        }
+        public static EvieCore Instance { get; private set; }
 
-        if (InitializeEvieSaveLoad)
-        {
-            EvieSaveLoad.Initialize();
-        }
+        [SerializeField]
+        private bool DontDestroyThisObject = true;
 
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        [Header("SybLibs initialize")]
+        [SerializeField]
+        private bool InitializeEvieFS = true;
 
-        Instance = this;
+        [SerializeField]
+        private bool InitializeEvieSaveLoad = true;
 
-        if (DontDestroyThisObject)
+        void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            if (InitializeEvieFS)
+            {
+                EvieFS.Initialize();
+            }
+
+            if (InitializeEvieSaveLoad)
+            {
+                EvieSaveLoad.Initialize();
+            }
+
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+
+            if (DontDestroyThisObject)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
         }
     }
 }

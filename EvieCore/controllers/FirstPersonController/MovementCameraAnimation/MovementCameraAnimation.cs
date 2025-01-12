@@ -1,51 +1,54 @@
 using UnityEngine;
 
-public class MovementCameraAnimation : MonoBehaviour, EvieCoreUpdate
+namespace Eviecore
 {
-    public Transform camera;
-    private PlayerCamera playerCamera;
-
-    [Header("Movement Tilt Settings")]
-    [Tooltip("ћаксимальное отклонение камеры при движении влево/вправ.")]
-    public float maxTiltAngle = 5f;
-
-    [Tooltip("—корость возврата к нулевому положению.")]
-    public float returnSpeed = 2f;
-
-    private float targetTiltAngle = 0f;  // ÷елевой угол наклона
-    private float currentTiltAngle = 0f; // “екущий угол наклона
-
-    private void Start()
+    public class MovementCameraAnimation : MonoBehaviour, EvieCoreUpdate
     {
-        // ѕолучаем ссылку на PlayerCamera, чтобы работать с движением
-        playerCamera = GetComponent<PlayerCamera>();
-    }
+        public Transform camera;
+        private PlayerCamera playerCamera;
 
-    public void OnUpdate()
-    {
-        // ѕровер€ем движение игрока по оси X
-        float horizontalMovement = Input.GetAxis("Horizontal");
+        [Header("Movement Tilt Settings")]
+        [Tooltip("ћаксимальное отклонение камеры при движении влево/вправ.")]
+        public float maxTiltAngle = 5f;
 
-        // ≈сли движение есть, наклон€ем камеру влево/вправ
-        if (horizontalMovement != 0f)
+        [Tooltip("—корость возврата к нулевому положению.")]
+        public float returnSpeed = 2f;
+
+        private float targetTiltAngle = 0f;  // ÷елевой угол наклона
+        private float currentTiltAngle = 0f; // “екущий угол наклона
+
+        private void Start()
         {
-            targetTiltAngle = maxTiltAngle * horizontalMovement; // Ќаправление наклона зависит от движени€
-        }
-        else
-        {
-            // ≈сли движение прекратилось, плавно возвращаем камеру в исходное положение
-            targetTiltAngle = 0f;
+            // ѕолучаем ссылку на PlayerCamera, чтобы работать с движением
+            playerCamera = GetComponent<PlayerCamera>();
         }
 
-        // ѕлавно возвращаем угол наклона камеры к целевому значению
-        currentTiltAngle = Mathf.Lerp(currentTiltAngle, targetTiltAngle, returnSpeed * Time.deltaTime);
+        public void OnUpdate()
+        {
+            // ѕровер€ем движение игрока по оси X
+            float horizontalMovement = Input.GetAxis("Horizontal");
 
-        // ѕримен€ем наклон к камере
-        camera.localRotation = Quaternion.Euler(currentTiltAngle, 0f, 0f); // “олько по оси X
-    }
+            // ≈сли движение есть, наклон€ем камеру влево/вправ
+            if (horizontalMovement != 0f)
+            {
+                targetTiltAngle = maxTiltAngle * horizontalMovement; // Ќаправление наклона зависит от движени€
+            }
+            else
+            {
+                // ≈сли движение прекратилось, плавно возвращаем камеру в исходное положение
+                targetTiltAngle = 0f;
+            }
 
-    private void OnDestroy()
-    {
-        UpdateManager.Instance.Unregister(this);
+            // ѕлавно возвращаем угол наклона камеры к целевому значению
+            currentTiltAngle = Mathf.Lerp(currentTiltAngle, targetTiltAngle, returnSpeed * Time.deltaTime);
+
+            // ѕримен€ем наклон к камере
+            camera.localRotation = Quaternion.Euler(currentTiltAngle, 0f, 0f); // “олько по оси X
+        }
+
+        private void OnDestroy()
+        {
+            UpdateManager.Instance.Unregister(this);
+        }
     }
 }

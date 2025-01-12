@@ -1,61 +1,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+namespace Eviecore
 {
-    public static StateManager Instance { get; private set; }
-
-    [SerializeField]
-    private List<string> states = new List<string>();
-
-    private string currentState;
-
-    private void Awake()
+    public class StateManager : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public static StateManager Instance { get; private set; }
+
+        [SerializeField]
+        private List<string> states = new List<string>();
+
+        private string currentState;
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
         }
-        Instance = this;
-    }
 
-    private void Start()
-    {
-        SetState(states[0]);
-    }
-
-    public void SetState(string newState)
-    {
-        if (states.Contains(newState))
+        private void Start()
         {
-            currentState = newState;
+            SetState(states[0]);
         }
-        else
+
+        public void SetState(string newState)
         {
-            Debug.LogWarning($"[EVIECORE/STATEMANAGER/WARNING] The state '{newState}' is missing from the list of possible states.");
+            if (states.Contains(newState))
+            {
+                currentState = newState;
+            }
+            else
+            {
+                Debug.LogWarning($"[EVIECORE/STATEMANAGER/WARNING] The state '{newState}' is missing from the list of possible states.");
+            }
+        }
+
+        public string GetCurrentState()
+        {
+            return currentState;
+        }
+
+        public bool IsCurrentState(string state)
+        {
+            return currentState == state;
+        }
+
+        public void AddState(string newState)
+        {
+            if (!states.Contains(newState))
+            {
+                states.Add(newState);
+            }
+            else
+            {
+                Debug.LogWarning($"[EVIECORE/STATEMANAGER/WARNING] The state '{newState}' already exists in the list.");
+            }
         }
     }
 
-    public string GetCurrentState()
-    {
-        return currentState;
-    }
-
-    public bool IsCurrentState(string state)
-    {
-        return currentState == state;
-    }
-
-    public void AddState(string newState)
-    {
-        if (!states.Contains(newState))
-        {
-            states.Add(newState);
-        }
-        else
-        {
-            Debug.LogWarning($"[EVIECORE/STATEMANAGER/WARNING] The state '{newState}' already exists in the list.");
-        }
-    }
 }

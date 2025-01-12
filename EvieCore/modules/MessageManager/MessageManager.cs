@@ -3,59 +3,123 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MessageManager : MonoBehaviour
+namespace Eviecore
 {
-    // Use this module with caution! Using messages is not a good practice.
-
-    public static MessageManager Instance { get; private set; }
-
-    // Словарь для хранения сообщений и их подписчиков
-    private Dictionary<string, Delegate> messageDictionary = new Dictionary<string, Delegate>();
-
-    private void Awake()
+    public class MessageManager : MonoBehaviour
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+        // Use this module with caution! Using messages is not a good practice.
 
-    // Подписка на сообщение без аргументов
-    public void Subscribe(string message, Action listener)
-    {
-        if (messageDictionary.ContainsKey(message))
+        public static MessageManager Instance { get; private set; }
+
+        // Словарь для хранения сообщений и их подписчиков
+        private Dictionary<string, Delegate> messageDictionary = new Dictionary<string, Delegate>();
+
+        private void Awake()
         {
-            if (messageDictionary[message] is Action existingAction)
+            if (Instance == null)
             {
-                messageDictionary[message] = Delegate.Combine(existingAction, listener);
+                Instance = this;
             }
             else
             {
-                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
+                Destroy(gameObject);
             }
         }
-        else
-        {
-            messageDictionary[message] = listener;
-        }
-    }
 
-    // Отписка от сообщения без аргументов
-    public void Unsubscribe(string message, Action listener)
-    {
-        if (messageDictionary.ContainsKey(message))
+        // Подписка на сообщение без аргументов
+        public void Subscribe(string message, Action listener)
         {
-            if (messageDictionary[message] is Action existingAction)
+            if (messageDictionary.ContainsKey(message))
             {
-                messageDictionary[message] = Delegate.Remove(existingAction, listener);
-
-                if (messageDictionary[message] == null)
+                if (messageDictionary[message] is Action existingAction)
                 {
-                    messageDictionary.Remove(message);
+                    messageDictionary[message] = Delegate.Combine(existingAction, listener);
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
+                }
+            }
+            else
+            {
+                messageDictionary[message] = listener;
+            }
+        }
+
+        // Отписка от сообщения без аргументов
+        public void Unsubscribe(string message, Action listener)
+        {
+            if (messageDictionary.ContainsKey(message))
+            {
+                if (messageDictionary[message] is Action existingAction)
+                {
+                    messageDictionary[message] = Delegate.Remove(existingAction, listener);
+
+                    if (messageDictionary[message] == null)
+                    {
+                        messageDictionary.Remove(message);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
+                }
+            }
+        }
+
+        // Подписка на сообщение с аргументом типа T
+        public void Subscribe<T>(string message, Action<T> listener)
+        {
+            if (messageDictionary.ContainsKey(message))
+            {
+                if (messageDictionary[message] is Action<T> existingAction)
+                {
+                    messageDictionary[message] = Delegate.Combine(existingAction, listener);
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
+                }
+            }
+            else
+            {
+                messageDictionary[message] = listener;
+            }
+        }
+
+        // Отписка от сообщения с аргументом типа T
+        public void Unsubscribe<T>(string message, Action<T> listener)
+        {
+            if (messageDictionary.ContainsKey(message))
+            {
+                if (messageDictionary[message] is Action<T> existingAction)
+                {
+                    messageDictionary[message] = Delegate.Remove(existingAction, listener);
+
+                    if (messageDictionary[message] == null)
+                    {
+                        messageDictionary.Remove(message);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
+                }
+            }
+        }
+
+        // Отправка сообщения без аргументов
+        public void SendMessage(string message)
+        {
+            if (messageDictionary.ContainsKey(message))
+            {
+                if (messageDictionary[message] is Action action)
+                {
+                    action.Invoke();
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
                 }
             }
             else
@@ -63,86 +127,26 @@ public class MessageManager : MonoBehaviour
                 Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
             }
         }
-    }
 
-    // Подписка на сообщение с аргументом типа T
-    public void Subscribe<T>(string message, Action<T> listener)
-    {
-        if (messageDictionary.ContainsKey(message))
+        // Отправка сообщения с аргументом типа T
+        public void SendMessage<T>(string message, T arg)
         {
-            if (messageDictionary[message] is Action<T> existingAction)
+            if (messageDictionary.ContainsKey(message))
             {
-                messageDictionary[message] = Delegate.Combine(existingAction, listener);
-            }
-            else
-            {
-                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
-            }
-        }
-        else
-        {
-            messageDictionary[message] = listener;
-        }
-    }
-
-    // Отписка от сообщения с аргументом типа T
-    public void Unsubscribe<T>(string message, Action<T> listener)
-    {
-        if (messageDictionary.ContainsKey(message))
-        {
-            if (messageDictionary[message] is Action<T> existingAction)
-            {
-                messageDictionary[message] = Delegate.Remove(existingAction, listener);
-
-                if (messageDictionary[message] == null)
+                if (messageDictionary[message] is Action<T> action)
                 {
-                    messageDictionary.Remove(message);
+                    action.Invoke(arg);
+                }
+                else
+                {
+                    Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
                 }
             }
             else
             {
-                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
+                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] The \"{message}\" message has no subscribers.");
             }
         }
     }
 
-    // Отправка сообщения без аргументов
-    public void SendMessage(string message)
-    {
-        if (messageDictionary.ContainsKey(message))
-        {
-            if (messageDictionary[message] is Action action)
-            {
-                action.Invoke();
-            }
-            else
-            {
-                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
-        }
-    }
-
-    // Отправка сообщения с аргументом типа T
-    public void SendMessage<T>(string message, T arg)
-    {
-        if (messageDictionary.ContainsKey(message))
-        {
-            if (messageDictionary[message] is Action<T> action)
-            {
-                action.Invoke(arg);
-            }
-            else
-            {
-                Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] message \"{message}\" has a mismatched subscriber type.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"[EVIECORE/MESSAGEMANAGER/WARNING] The \"{message}\" message has no subscribers.");
-        }
-    }
 }

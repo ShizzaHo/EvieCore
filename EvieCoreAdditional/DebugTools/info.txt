@@ -5,3 +5,5 @@ DebugTools provides basic tools for debugging your document, and also provides a
 
 DebugTools dependencies and requirements : 
 - Installed EvieCore at least 1.0.0 with all dependencies installed
+
+DOCUMENTATION: https://github.com/ShizzaHo/EvieCore/blob/main/README.md

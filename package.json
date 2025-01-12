@@ -1,0 +1,22 @@
+{
+  "name": "com.shizzaho.eviecore",
+  "displayName": "EvieCore",
+  "version": "1.0.0",
+  "description": "EvieCore is a set of tools and solutions for game development.",
+  "keywords": [ "manager", "data", "update", "settings", "state", "trigger", "message", "FirstPersonController", "hud", "raycast", "file", "filesystem", "SaveLoad", "save", "load", "ai", "debug", "i18n", "localization" ],
+  "category": "Game Toolkits",
+  "dependencies": {
+    "com.dbrizov.naughtyattributes": "2.1.4"
+  },
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "Demo",
+      "path": "EvieCore/Demo/EvieCoreDemo/Demo.unity"
+    }
+  ],
+  "author": {
+    "name": "ShizzaHo",
+    "url": "https://github.com/ShizzaHo"
+  }
+}

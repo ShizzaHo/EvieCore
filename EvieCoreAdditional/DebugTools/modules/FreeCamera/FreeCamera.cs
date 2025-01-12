@@ -1,33 +1,36 @@
 using UnityEngine;
 
-public class FreeCamera : MonoBehaviour, EvieCoreDebugTool
+namespace Eviecore
 {
-    private bool isActive = false;
-    public GameObject camera;
-
-    private void Start()
+    public class FreeCamera : MonoBehaviour, EvieCoreDebugTool
     {
-        DEBUGHUDManager.Instance.AddDebugTool(this, "Free Camera");
-    }
+        private bool isActive = false;
+        public GameObject camera;
 
-    public void OnActivated()
-    {
-        isActive = true;
-        camera.SetActive(true);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+        private void Start()
+        {
+            DEBUGHUDManager.Instance.AddDebugTool(this, "Free Camera");
+        }
 
-    public void OnDeactivated()
-    {
-        isActive = false;
-        camera.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
+        public void OnActivated()
+        {
+            isActive = true;
+            camera.SetActive(true);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
-    public bool IsActive()
-    {
-        return isActive;
+        public void OnDeactivated()
+        {
+            isActive = false;
+            camera.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        public bool IsActive()
+        {
+            return isActive;
+        }
     }
 }

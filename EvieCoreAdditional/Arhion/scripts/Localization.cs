@@ -8,23 +8,16 @@ namespace Arhion
         private static Dictionary<string, string> localizedTexts = new Dictionary<string, string>();
         private static string currentLanguage;
 
-        /// <summary>
-        /// Инициализация локализации с выбором языка.
-        /// </summary>
         public static void Initialize(string langName)
         {
             SetLanguage(langName);
         }
 
-        /// <summary>
-        /// Устанавливает текущий язык и загружает соответствующий JSON-файл.
-        /// </summary>
         public static void SetLanguage(string langName)
         {
             currentLanguage = langName;
             localizedTexts.Clear();
 
-            // Загружаем файл из папки Resources
             TextAsset jsonFile = Resources.Load<TextAsset>($"EvieCore/Arhion/Langs/{langName}");
 
             if (jsonFile != null)
@@ -37,9 +30,6 @@ namespace Arhion
             }
         }
 
-        /// <summary>
-        /// Возвращает локализованную строку по ключу.
-        /// </summary>
         public static string GetLocalizedText(string key)
         {
             if (localizedTexts.TryGetValue(key, out string localizedText))
@@ -49,7 +39,7 @@ namespace Arhion
             else
             {
                 Debug.LogWarning($"Key '{key}' not found in localization for language '{currentLanguage}'.");
-                return key; // Возвращаем ключ, если перевод не найден.
+                return key;
             }
         }
 

@@ -5,3 +5,5 @@ ExinAI provides flexible tools for creating AI for your enemies.
 
 Dependencies and requirements for running ExinAI: 
 - Installed EvieCore at least 1.0.0 with all dependencies installed
+
+DOCUMENTATION: https://github.com/ShizzaHo/EvieCore/blob/main/README.md

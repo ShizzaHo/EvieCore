@@ -1,117 +1,119 @@
 using System;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
+using Eviecore;
 
-public class EvieCoreDefaultConsoleCommands : MonoBehaviour
+namespace Eviecore
 {
-    private Console console;
-
-    void Start()
+    public class EvieCoreDefaultConsoleCommands : MonoBehaviour
     {
-        console = GetComponent<Console>();
+        private Console console;
 
-        console.RegisterCommand("eviecore", EvieCore);
-
-        console.RegisterCommand("destroy", _Destroy);
-        console.RegisterCommand("timescale", TimeScale);
-
-        console.RegisterCommand("clrum", ClearUpdateManager);
-
-        console.RegisterCommand("clrdm", ClearDataManager);
-        console.RegisterCommand("rmdm", RemoveDataManager);
-
-        console.RegisterCommand("sendmessage", SendMessageManager);
-
-        console.RegisterCommand("setgamestate", SetGameState);
-
-        console.RegisterCommand("edittrigger", EditTrigger);
-    }
-    public void EvieCore(string arg)
-    {
-        console.LogToConsole("<color=#6da2ce>EVIECORE FOREVER!!!<color=white>");
-    }
-
-    public void _Destroy(string arg)
-    {
-        Destroy(GameObject.Find(arg));
-    }
-
-    public void TimeScale(string arg)
-    {
-        Time.timeScale = float.Parse(arg);
-    }
-
-    public void ClearUpdateManager(string arg)
-    {
-        UpdateManager.Instance.ClearStorage();
-    }
-
-    public void ClearDataManager(string arg)
-    {
-        DataManager.Instance.ClearAllData();
-    }
-
-    public void RemoveDataManager(string arg)
-    {
-        DataManager.Instance.RemoveData(arg);
-    }
-
-    public void SendMessageManager(string arg)
-    {
-        MessageManager.Instance.SendMessage(arg);
-    }
-
-    public void SetGameState(string arg)
-    {
-        StateManager.Instance.SetState(arg);
-    }
-
-    public void EditTrigger(string arg)
-    {
-        if (string.IsNullOrWhiteSpace(arg))
+        void Start()
         {
-            console.LogToConsole("<color=red>Error: Argument cannot be null or empty.<color=white>");
-            return;
+            console = GetComponent<Console>();
+
+            console.RegisterCommand("eviecore", EvieCore);
+
+            console.RegisterCommand("destroy", _Destroy);
+            console.RegisterCommand("timescale", TimeScale);
+
+            console.RegisterCommand("clrum", ClearUpdateManager);
+
+            console.RegisterCommand("clrdm", ClearDataManager);
+            console.RegisterCommand("rmdm", RemoveDataManager);
+
+            console.RegisterCommand("sendmessage", SendMessageManager);
+
+            console.RegisterCommand("setgamestate", SetGameState);
+
+            console.RegisterCommand("edittrigger", EditTrigger);
+        }
+        public void EvieCore(string arg)
+        {
+            console.LogToConsole("<color=#6da2ce>EVIECORE FOREVER!!!<color=white>");
         }
 
-        if (!arg.Contains("-"))
+        public void _Destroy(string arg)
         {
-            console.LogToConsole("<color=yellow>The command argument is incorrect, use the entry format: <key>-<true/false><color=white>");
-            return;
+            Destroy(GameObject.Find(arg));
         }
 
-        string[] argSplit = arg.Split('-');
-
-        if (argSplit.Length != 2)
+        public void TimeScale(string arg)
         {
-            console.LogToConsole("<color=yellow>The command argument is incorrect, use the entry format: <key>-<true/false><color=white>");
-            return;
+            Time.timeScale = float.Parse(arg);
         }
 
-        string key = argSplit[0].Trim();
-        string value = argSplit[1].Trim();
-
-        if (string.IsNullOrWhiteSpace(key))
+        public void ClearUpdateManager(string arg)
         {
-            console.LogToConsole("<color=red>Error: Key cannot be null or empty.<color=white>");
-            return;
+            UpdateManager.Instance.ClearStorage();
         }
 
-        if (!bool.TryParse(value, out bool state))
+        public void ClearDataManager(string arg)
         {
-            console.LogToConsole($"<color=yellow>Error: Value '{value}' is not a valid boolean. Use 'true' or 'false'.<color=white>");
-            return;
+            DataManager.Instance.ClearAllData();
         }
 
-        try
+        public void RemoveDataManager(string arg)
         {
-            TriggerManager.Instance.SetTriggerState(key, state);
-            console.LogToConsole($"<color=green>Trigger '{key}' successfully set to {state}.<color=white>");
+            DataManager.Instance.RemoveData(arg);
         }
-        catch (Exception ex)
+
+        public void SendMessageManager(string arg)
         {
-            console.LogToConsole($"<color=red>Error setting trigger state: {ex.Message}<color=white>");
+            MessageManager.Instance.SendMessage(arg);
+        }
+
+        public void SetGameState(string arg)
+        {
+            StateManager.Instance.SetState(arg);
+        }
+
+        public void EditTrigger(string arg)
+        {
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                console.LogToConsole("<color=red>Error: Argument cannot be null or empty.<color=white>");
+                return;
+            }
+
+            if (!arg.Contains("-"))
+            {
+                console.LogToConsole("<color=yellow>The command argument is incorrect, use the entry format: <key>-<true/false><color=white>");
+                return;
+            }
+
+            string[] argSplit = arg.Split('-');
+
+            if (argSplit.Length != 2)
+            {
+                console.LogToConsole("<color=yellow>The command argument is incorrect, use the entry format: <key>-<true/false><color=white>");
+                return;
+            }
+
+            string key = argSplit[0].Trim();
+            string value = argSplit[1].Trim();
+
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                console.LogToConsole("<color=red>Error: Key cannot be null or empty.<color=white>");
+                return;
+            }
+
+            if (!bool.TryParse(value, out bool state))
+            {
+                console.LogToConsole($"<color=yellow>Error: Value '{value}' is not a valid boolean. Use 'true' or 'false'.<color=white>");
+                return;
+            }
+
+            try
+            {
+                TriggerManager.Instance.SetTriggerState(key, state);
+                console.LogToConsole($"<color=green>Trigger '{key}' successfully set to {state}.<color=white>");
+            }
+            catch (Exception ex)
+            {
+                console.LogToConsole($"<color=red>Error setting trigger state: {ex.Message}<color=white>");
+            }
         }
     }
 }
