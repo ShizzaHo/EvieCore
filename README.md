@@ -8,7 +8,7 @@ The project is closed and migrated to the new EvieEngine product. It has no deta
 
 Проект закрыт и мигрирован в новый продукт EvieEngine. Он без подробной документации, и создан чисто для меня любимого. Если вам охотно разобраться в нем, милости прошу в новый репозиторий, там есть Einferia в открытом доступе.
 
-[Evie Engine]([./docs/EN/EvieCoreAdditional/main.md](https://github.com/ShizzaHo/EvieEngine))
+[Evie Engine](https://github.com/ShizzaHo/EvieEngine)
 
 !!!
 
