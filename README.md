@@ -1,5 +1,19 @@
 [[RUSSIAN README]](./README%20RU.md)
 
+
+
+!!!
+
+The project is closed and migrated to the new EvieEngine product. It has no detailed documentation, and was created purely for my beloved. If you would like to understand it, you are welcome to the new repository, there is an Einferia in the public domain.
+
+Проект закрыт и мигрирован в новый продукт EvieEngine. Он без подробной документации, и создан чисто для меня любимого. Если вам охотно разобраться в нем, милости прошу в новый репозиторий, там есть Einferia в открытом доступе.
+
+[Evie Engine]([./docs/EN/EvieCoreAdditional/main.md](https://github.com/ShizzaHo/EvieEngine))
+
+!!!
+
+
+
 # EvieCore
 
 EvieCore is a set of tools and solutions for game development. The main goal of EvieCore is to simplify developers' work, streamline processes and organize the project.  
